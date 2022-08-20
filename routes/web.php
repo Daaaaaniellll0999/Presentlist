@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MenuControlador;
+use App\Http\Controllers\controladorAlumnos;
+use App\Http\Controllers\controladorDocentes;
+use App\Http\Controllers\RolController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,10 +25,20 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/inicio', [MenuControlador::class, 'opcInicio']);
+Route::get('/conocenos', [MenuControlador::class, 'opnConocenos']);
+Route::get('/consultadocentes', [MenuControlador::class, 'opcconsultadocentes']);
+Route::get('/consultaalumnos', [MenuControlador::class, 'opcconsultaalumnos']);
+Auth::routes();
+
+Route::group(['middleware' => ['auth']], function(){
+    Route::resource('alumnos', controladorAlumnos::class);
+    Route::resource('docentes', controladorDocentes::class);
+    Route::resource('Roles', RolController::class);
+});

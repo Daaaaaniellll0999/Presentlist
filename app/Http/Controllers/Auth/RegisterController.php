@@ -49,21 +49,25 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-
+        //print_r($data); die();
     
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'apePa' => ['required', 'string', 'max:255'],
-            'apeMa' => ['required', 'string', 'max:255'],
-            'tipousu' => ['required', 'string', 'max:255'],
-            'telefono' => ['required', 'string', 'max:10'],
+            'Nombre' => ['required', 'string', 'max:255'],
+            'Apellido1' => ['required', 'string', 'max:255'],
+            'Apellido2' => ['required', 'string', 'max:255'],
+            'password' => ['required', 'string', 'min:8', 'max:250', 'confirmed'],
+            'Tipo' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:tipousuario'],
-            'Password' => ['required', 'string', 'min:8', 'confirmed'],
+            'Telefono' => ['required', 'string', 'max:10'],
+            
             
             
 
         ]);
+       
     }
+
+   
 
     /**
      * Create a new user instance after a valid registration.
@@ -75,13 +79,13 @@ class RegisterController extends Controller
     {
        
         return User::create([
-            'Nombre' => $data['name'],
-            'Apellido1' => $data['apePa'],
-            'Apellido2' => $data['apeMa'],
-            'Tipo' => $data['tipousu'],
-            'Telefono' => $data['telefono'],
+            'Nombre' => $data['Nombre'],
+            'Apellido1' => $data['Apellido1'],
+            'Apellido2' => $data['Apellido2'],
+            'password' => Hash::make($data['password']),
+            'Tipo' => $data['Tipo'],
             'email' => $data['email'],
-            'Password' => Hash::make($data['Password']),
+            'Telefono' => $data['Telefono'],
             
 
         ]);

@@ -10,7 +10,11 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
-
+                        @if ($errors->has('g-recaptcha-response'))
+    <span class="help-block">
+        <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+    </span>
+@endif
                         <div class="row mb-3">
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Correo') }}</label>
 
@@ -38,7 +42,14 @@
                                 @enderror
                             </div>
                         </div>
-
+                        <div class="row mb-3">
+                        <div class="col-md-6 offset-md-4">
+                        
+                        {!! NoCaptcha::renderJs('es', false, 'onloadCallback') !!}
+                        
+                        {!! NoCaptcha::display() !!}
+                        </div>
+                        </div>
                         <div class="row mb-3">
                             <div class="col-md-6 offset-md-4">
                                 <div class="form-check">

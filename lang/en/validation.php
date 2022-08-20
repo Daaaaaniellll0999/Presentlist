@@ -154,6 +154,13 @@ return [
         ],
     ],
 
+    'custom' => [
+        'g-recaptcha-response' => [
+            'required' => 'Por favor verifica que no eres un robot.',
+            'captcha' => '¡Error de CAPTCHA! inténtelo de nuevo más tarde o comuníquese con el administrador del sitio.',
+        ],
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Attributes
